@@ -1,23 +1,14 @@
-## GM bot
+## NextJS XMTP Client
 
-A simple XMTP agent that responds with `gm` to any message it receives
-
-> [!TIP]
-> This example is part of the [XMTP agent examples](https://github.com/ephemeraHQ/xmtp-agent-examples) collection.
-
-## Web inbox
-
-Try XMTP using [xmtp.chat](https://xmtp.chat) and sending a message to `gm.xmtp.eth`
-
-![](/gm.png)
+A simple XMTP client that displays the client details
 
 ## Run the agent
 
 ```bash
 # git clone repo
-git clone https://github.com/xmtp/gm-bot.git
+git clone https://github.com/xmtp/xmtp-nextjs-app.git
 # go to the folder
-cd gm-bot
+cd xmtp-nextjs-app
 # install packages
 yarn
 # run the agent
