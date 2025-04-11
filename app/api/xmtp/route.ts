@@ -1,6 +1,6 @@
 import { Client } from "@xmtp/node-sdk";
 import { NextResponse } from "next/server";
-import { createSigner, getEncryptionKeyFromHex } from "../../../src/helper";
+import { createSigner, getEncryptionKeyFromHex } from "../../../helpers/client";
 
 export async function GET() {
   try {
@@ -8,14 +8,20 @@ export async function GET() {
     const encryptionKey = process.env.ENCRYPTION_KEY
       ? getEncryptionKeyFromHex(process.env.ENCRYPTION_KEY)
       : undefined;
-
+    if (!encryptionKey) {
+      throw new Error("Encryption key is not set");
+    }
+    if (!signer) {
+      throw new Error("Signer is not set");
+    }
     const client = await Client.create(signer, encryptionKey, {
-      env: process.env.XMTP_ENV as "production" | "development" | "dev",
+      env: process.env.XMTP_ENV as "production" | "dev" | "local",
     });
-
+    console.log("Client created successfully");
+    console.log("Client details:", client.inboxId);
     const clientDetails = {
-      address: client.address,
-      env: client.env,
+      address: (await signer.getIdentifier()).identifier,
+      env: process.env.XMTP_ENV as "production" | "dev" | "local",
     };
 
     return NextResponse.json(clientDetails);
