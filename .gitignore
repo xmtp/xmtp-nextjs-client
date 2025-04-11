@@ -36,14 +36,12 @@ logs
 *.njsproj
 *.sln
 *.sw?
-.yarn
 .next
 # build artifacts
 dist
 .next
 # yarn
 .pnp.*
-.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
