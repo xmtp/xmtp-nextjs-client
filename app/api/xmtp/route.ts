@@ -11,6 +11,8 @@ const { WALLET_KEY, ENCRYPTION_KEY, XMTP_ENV } = validateEnvironment([
   "XMTP_ENV",
 ]);
 
+let xmtpClient: Client | null = null;
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const source = url.searchParams.get("source");
@@ -23,52 +25,67 @@ export async function GET(request: Request) {
   }
 
   try {
-    const signer = createSigner(WALLET_KEY);
-    const dbEncryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
-    if (!signer) {
-      throw new Error("Signer is not set");
+    if (!xmtpClient) {
+      const signer = createSigner(WALLET_KEY);
+      const dbEncryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
+      if (!signer) {
+        throw new Error("Signer is not set");
+      }
+      xmtpClient = await Client.create(signer, {
+        dbEncryptionKey,
+        env: XMTP_ENV as XmtpEnv,
+      });
+      logAgentDetails(xmtpClient);
+
+      console.log("✓ Syncing conversations...");
+      await xmtpClient.conversations.sync();
     }
-    const client = await Client.create(signer, {
-      dbEncryptionKey,
-      env: XMTP_ENV as XmtpEnv,
-    });
-    logAgentDetails(client);
 
-    console.log("✓ Syncing conversations...");
-    await client.conversations.sync();
+    if (!xmtpClient || !xmtpClient.signer) {
+      throw new Error("XMTP client or signer is not initialized");
+    }
 
-    console.log("Waiting for messages...");
-    const stream = await client.conversations.streamAllMessages();
-
-    for await (const message of stream) {
-      if (
-        message?.senderInboxId.toLowerCase() === client.inboxId.toLowerCase() ||
-        message?.contentType?.typeId !== "text"
-      ) {
-        continue;
-      }
-
-      const conversation = await client.conversations.getConversationById(
-        message.conversationId
-      );
-
-      if (!conversation) {
-        console.log("Unable to find conversation, skipping");
-        continue;
-      }
-
-      const inboxState = await client.preferences.inboxStateFromInboxIds([
-        message.senderInboxId,
-      ]);
-      const addressFromInboxId = inboxState[0].identifiers[0].identifier;
-      console.log(`Sending "gm" response to ${addressFromInboxId}...`);
-      await conversation.send("gm");
-
+    // Start streaming messages in parallel
+    (async () => {
       console.log("Waiting for messages...");
+      const stream = await xmtpClient!.conversations.streamAllMessages();
+
+      for await (const message of stream) {
+        if (
+          message?.senderInboxId.toLowerCase() ===
+            xmtpClient!.inboxId.toLowerCase() ||
+          message?.contentType?.typeId !== "text"
+        ) {
+          continue;
+        }
+
+        const conversation =
+          await xmtpClient!.conversations.getConversationById(
+            message.conversationId
+          );
+
+        if (!conversation) {
+          console.log("Unable to find conversation, skipping");
+          continue;
+        }
+
+        const inboxState = await xmtpClient!.preferences.inboxStateFromInboxIds(
+          [message.senderInboxId]
+        );
+        const addressFromInboxId = inboxState[0].identifiers[0].identifier;
+        console.log(`Sending "gm" response to ${addressFromInboxId}...`);
+        await conversation.send("gm");
+
+        console.log("Waiting for messages...");
+      }
+    })();
+
+    if (!xmtpClient) {
+      throw new Error("XMTP client is not initialized");
     }
 
     const clientDetails = {
-      address: (await signer.getIdentifier()).identifier,
+      address: (await xmtpClient.signer.getIdentifier()).identifier,
       env: process.env.XMTP_ENV as "production" | "dev" | "local",
     };
 
