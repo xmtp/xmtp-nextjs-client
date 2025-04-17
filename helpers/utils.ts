@@ -1,10 +1,10 @@
+import type { Client } from "@xmtp/node-sdk";
 import "dotenv/config";
 
-export const logAgentDetails = (
-  address: string,
-  inboxId: string,
-  env: string,
-) => {
+export const logAgentDetails = (client: Client) => {
+  const address = client.accountIdentifier?.identifier ?? "";
+  const inboxId = client.inboxId;
+  const env = client.options?.env ?? "dev";
   const createLine = (length: number, char = "═"): string =>
     char.repeat(length - 2);
   const centerText = (text: string, width: number): string => {
@@ -34,9 +34,15 @@ export const logAgentDetails = (
     `╔${createLine(maxLengthWithDbPath)}╗`,
     `║   ${centerText("Agent Details", maxLengthWithDbPath - 6)} ║`,
     `╟${createLine(maxLengthWithDbPath, "─")}╢`,
-    `║ 📍 Address: ${address}${" ".repeat(maxLengthWithDbPath - address.length - 15)}║`,
-    `║ 📍 inboxId: ${inboxId}${" ".repeat(maxLengthWithDbPath - inboxId.length - 15)}║`,
-    `║ 📂 DB Path: ${dbPath}${" ".repeat(maxLengthWithDbPath - dbPath.length - 15)}║`,
+    `║ 📍 Address: ${address}${" ".repeat(
+      maxLengthWithDbPath - address.length - 15
+    )}║`,
+    `║ 📍 inboxId: ${inboxId}${" ".repeat(
+      maxLengthWithDbPath - inboxId.length - 15
+    )}║`,
+    `║ 📂 DB Path: ${dbPath}${" ".repeat(
+      maxLengthWithDbPath - dbPath.length - 15
+    )}║`,
     `║ 🛜  Network: ${env}${" ".repeat(maxLengthWithDbPath - env.length - 15)}║`,
     `║ 🔗 URL: ${url}${" ".repeat(maxLengthWithDbPath - url.length - 11)}║`,
     `╚${createLine(maxLengthWithDbPath)}╝`,
