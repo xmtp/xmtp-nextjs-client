@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     const fetchClientDetails = async () => {
       try {
-        const response = await fetch("/api/xmtp");
+        const response = await fetch("/api/xmtp?source=page");
         const data = await response.json();
 
         if (response.ok) {

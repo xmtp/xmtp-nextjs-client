@@ -11,7 +11,17 @@ const { WALLET_KEY, ENCRYPTION_KEY, XMTP_ENV } = validateEnvironment([
   "XMTP_ENV",
 ]);
 
-export async function GET() {
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const source = url.searchParams.get("source");
+
+  if (source !== "page") {
+    return NextResponse.json(
+      { error: "Unauthorized request source" },
+      { status: 403 }
+    );
+  }
+
   try {
     const signer = createSigner(WALLET_KEY);
     const dbEncryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);

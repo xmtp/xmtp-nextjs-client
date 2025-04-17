@@ -1,5 +1,5 @@
 {
   "/_not-found": "app/_not-found.js",
-  "/page": "app/page.js",
-  "/api/xmtp/route": "app/api/xmtp/route.js"
+  "/api/xmtp/route": "app/api/xmtp/route.js",
+  "/page": "app/page.js"
 }
