@@ -5,7 +5,7 @@ node_modules
 
 # testing
 coverage
-.next
+.next/
 # misc
 .DS_Store
 *.pem
