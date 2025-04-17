@@ -1,24 +1,62 @@
 import { Client } from "@xmtp/node-sdk";
 import { NextResponse } from "next/server";
 import { createSigner, getEncryptionKeyFromHex } from "../../../helpers/client";
+import { logAgentDetails, validateEnvironment } from "../../../helpers/utils";
+import { type XmtpEnv } from "@xmtp/node-sdk";
+
+// Validate environment variables
+const { WALLET_KEY, ENCRYPTION_KEY, XMTP_ENV } = validateEnvironment([
+  "WALLET_KEY",
+  "ENCRYPTION_KEY",
+  "XMTP_ENV",
+]);
 
 export async function GET() {
   try {
-    const signer = createSigner(process.env.WALLET_KEY as `0x${string}`);
-    const encryptionKey = process.env.ENCRYPTION_KEY
-      ? getEncryptionKeyFromHex(process.env.ENCRYPTION_KEY)
-      : undefined;
-    if (!encryptionKey) {
-      throw new Error("Encryption key is not set");
-    }
+    const signer = createSigner(WALLET_KEY);
+    const dbEncryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
     if (!signer) {
       throw new Error("Signer is not set");
     }
-    const client = await Client.create(signer, encryptionKey, {
-      env: process.env.XMTP_ENV as "production" | "dev" | "local",
+    const client = await Client.create(signer, {
+      dbEncryptionKey,
+      env: XMTP_ENV as XmtpEnv,
     });
-    console.log("Client created successfully");
-    console.log("Client details:", client.inboxId);
+    logAgentDetails(client);
+
+    console.log("✓ Syncing conversations...");
+    await client.conversations.sync();
+
+    console.log("Waiting for messages...");
+    const stream = await client.conversations.streamAllMessages();
+
+    for await (const message of stream) {
+      if (
+        message?.senderInboxId.toLowerCase() === client.inboxId.toLowerCase() ||
+        message?.contentType?.typeId !== "text"
+      ) {
+        continue;
+      }
+
+      const conversation = await client.conversations.getConversationById(
+        message.conversationId
+      );
+
+      if (!conversation) {
+        console.log("Unable to find conversation, skipping");
+        continue;
+      }
+
+      const inboxState = await client.preferences.inboxStateFromInboxIds([
+        message.senderInboxId,
+      ]);
+      const addressFromInboxId = inboxState[0].identifiers[0].identifier;
+      console.log(`Sending "gm" response to ${addressFromInboxId}...`);
+      await conversation.send("gm");
+
+      console.log("Waiting for messages...");
+    }
+
     const clientDetails = {
       address: (await signer.getIdentifier()).identifier,
       env: process.env.XMTP_ENV as "production" | "dev" | "local",

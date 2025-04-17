@@ -591,51 +591,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-group-updated@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-group-updated@npm:2.0.1"
+"@xmtp/content-type-group-updated@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-group-updated@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/d0e142360bbf977bd211b4adae3725b17509cedee2f97e942a649aabed2ebb705755da1bc6db6283b30f7365f6edc4111e700120c54d76ddd9ffc141cbf7ee8b
+  checksum: 10c0/6a607b04d4ee92e4fbb374b3a347b9183d8e8c290cd3f6999d9480d85e9df7602b8c7f377ac36cf1c97f1cb412a014a0f493e91be8be4daa1c382d2152ccf960
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-primitives@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-primitives@npm:2.0.1"
+"@xmtp/content-type-primitives@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-primitives@npm:2.0.2"
   dependencies:
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/dd53fc024363ea5d552ef2bd287fb5e0e5271bba232c8244d104e95485d1ae12fea387f7b7c2c8cf2fe8a894c079a09f31dd1096bae80508f5b163ac42c66561
+  checksum: 10c0/84ea3432e65e7f0483b5f396e1169e47d6f18201085b8f47e0f4e1d80d6573b97716f654acdef0390f2a3de987e6227cdceed99e446a0b60e4a0f116d4f6dded
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-text@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-text@npm:2.0.1"
+"@xmtp/content-type-text@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-text@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
-  checksum: 10c0/edbefabd0963a995070d526d594342b6b96b11e8c0fd092e9b1f19e960d71b505971a232d1b8cfc42997dfb9553e051fa0cb593102488a091369b599f7e9b690
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+  checksum: 10c0/97676b533a9401cb110c586bd1a1a8ab03d15e66ad2c7f0fa6ed8aaa726cdab4b00d994b63e3743d2e84ac76e102f97149c7abbce3c8e3244cc7a1238d5130c1
   languageName: node
   linkType: hard
 
-"@xmtp/node-bindings@npm:^1.2.0-dev.bed98df":
-  version: 1.2.0-dev.bed98df
-  resolution: "@xmtp/node-bindings@npm:1.2.0-dev.bed98df"
-  checksum: 10c0/c2fa41a0ae6787a23bcb3e7359adcdc2ce1f99fbda5c1b30066659f2723db7ad5cb2ec3c21cf5b6447b7acde12e3b1a6d716f3258ece8449585d3e5dd3bed1e8
+"@xmtp/node-bindings@npm:1.2.0-dev.c24af30":
+  version: 1.2.0-dev.c24af30
+  resolution: "@xmtp/node-bindings@npm:1.2.0-dev.c24af30"
+  checksum: 10c0/0ca7dbe59694cf11e17cb30af0264bd341332338724faa112371265f8caf7fdb75661bc32ac1f5cb3aae2e504a8d5db15440a427c412a94331d317f7bc50c6a9
   languageName: node
   linkType: hard
 
-"@xmtp/node-sdk@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@xmtp/node-sdk@npm:1.2.0"
+"@xmtp/node-sdk@npm:2.0.3":
+  version: 2.0.3
+  resolution: "@xmtp/node-sdk@npm:2.0.3"
   dependencies:
-    "@xmtp/content-type-group-updated": "npm:^2.0.1"
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
-    "@xmtp/content-type-text": "npm:^2.0.1"
-    "@xmtp/node-bindings": "npm:^1.2.0-dev.bed98df"
+    "@xmtp/content-type-group-updated": "npm:^2.0.2"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/content-type-text": "npm:^2.0.2"
+    "@xmtp/node-bindings": "npm:1.2.0-dev.c24af30"
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/a233d9ffd5f0c4eacd5590458949c9c5c09eb101dfb66582cbeb14cfd7e8b4fd53247b9e0253b07503381b550c2c39f4aa9f8e08fc1a24ec716c3a92833854c3
+  checksum: 10c0/e10724745d5417b29663766afa56c789e0be7ac229a7f7d071f486b380a884068633669c37fd05065d55c4ae8876b2a75b496c0a62ba0be8310657cb2592023f
   languageName: node
   linkType: hard
 
@@ -2963,7 +2963,7 @@ __metadata:
     "@types/node": "npm:^20.14.2"
     "@types/react": "npm:^18.2.64"
     "@types/react-dom": "npm:^18.2.21"
-    "@xmtp/node-sdk": "npm:1.2.0"
+    "@xmtp/node-sdk": "npm:2.0.3"
     autoprefixer: "npm:^10.4.18"
     dotenv: "npm:^16.4.5"
     next: "npm:14.1.3"
