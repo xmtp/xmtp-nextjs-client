@@ -31,6 +31,13 @@ export async function GET(request: Request) {
       if (!signer) {
         throw new Error("Signer is not set");
       }
+      console.log("Creating XMTP client...");
+      console.log("signer", signer);
+      console.log("dbEncryptionKey", dbEncryptionKey);
+      console.log("XMTP_ENV", XMTP_ENV);
+      console.log("signer.getIdentifier()", await signer.getIdentifier());
+      console.log("WALLET_KEY", WALLET_KEY);
+      console.log("ENCRYPTION_KEY", ENCRYPTION_KEY);
       xmtpClient = await Client.create(signer, {
         dbEncryptionKey,
         env: XMTP_ENV as XmtpEnv,
