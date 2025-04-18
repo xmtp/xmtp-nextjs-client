@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [clientDetails, setClientDetails] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchClientDetails = async () => {
@@ -19,6 +20,8 @@ export default function Home() {
         }
       } catch (err) {
         setError("Failed to fetch client details");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -28,6 +31,8 @@ export default function Home() {
   return (
     <main className="min-h-screen p-8">
       <h1 className="text-2xl font-bold mb-4">XMTP Client Details</h1>
+
+      {loading && <div className="text-blue-500 mb-4">Loading...</div>}
 
       {error && <div className="text-red-500 mb-4">Error: {error}</div>}
 
