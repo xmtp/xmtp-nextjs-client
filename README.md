@@ -1,3 +1,10 @@
+![Status](https://img.shields.io/badge/Deprecated-brown)
+
+> [!CAUTION]
+> This repository is no longer maintained. For the latest guidance on building agents with XMTP, see the [xmtp-agent-examples](https://github.com/ephemeraHQ/xmtp-agent-examples) project.
+
+The documentation below is provided for historical reference only.
+
 # XMTP Next.js GM agent
 
 This agent replies `gm` to all messages.
