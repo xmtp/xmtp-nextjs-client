@@ -66,15 +66,6 @@ export const getEncryptionKeyFromHex = (hex: string) => {
   return fromString(hex, "hex");
 };
 
-export const getDbPath = (description: string = "xmtp") => {
-  //Checks if the environment is a Railway deployment
-  const volumePath = process.env.RAILWAY_VOLUME_MOUNT_PATH ?? ".data/xmtp";
-  // Create database directory if it doesn't exist
-  if (!fs.existsSync(volumePath)) {
-    fs.mkdirSync(volumePath, { recursive: true });
-  }
-  return `${volumePath}/${description}.db3`;
-};
 
 export const logAgentDetails = async (client: Client): Promise<void> => {
   console.log(`\x1b[38;2;252;76;52m
