@@ -1,7 +1,11 @@
 import { Client } from "@xmtp/node-sdk";
 import { NextResponse } from "next/server";
-import { createSigner, getEncryptionKeyFromHex } from "../../../helpers/client";
-import { logAgentDetails, validateEnvironment } from "../../../helpers/utils";
+  import {
+  logAgentDetails,
+  validateEnvironment,
+  createSigner,
+  getEncryptionKeyFromHex,
+} from "../../../helpers/client";
 import { type XmtpEnv } from "@xmtp/node-sdk";
 
 // Validate environment variables
