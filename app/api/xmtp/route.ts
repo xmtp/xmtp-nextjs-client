@@ -1,13 +1,17 @@
 import { Client } from "@xmtp/node-sdk";
 import { NextResponse } from "next/server";
-import { createSigner, getEncryptionKeyFromHex } from "../../../helpers/client";
-import { logAgentDetails, validateEnvironment } from "../../../helpers/utils";
+  import {
+  logAgentDetails,
+  validateEnvironment,
+  createSigner,
+  getEncryptionKeyFromHex,
+} from "../../../helpers/client";
 import { type XmtpEnv } from "@xmtp/node-sdk";
 
 // Validate environment variables
-const { WALLET_KEY, ENCRYPTION_KEY, XMTP_ENV } = validateEnvironment([
+const { WALLET_KEY, DB_ENCRYPTION_KEY, XMTP_ENV } = validateEnvironment([
   "WALLET_KEY",
-  "ENCRYPTION_KEY",
+  "DB_ENCRYPTION_KEY",
   "XMTP_ENV",
 ]);
 
@@ -27,7 +31,7 @@ export async function GET(request: Request) {
   try {
     if (!xmtpClient) {
       const signer = createSigner(WALLET_KEY);
-      const dbEncryptionKey = getEncryptionKeyFromHex(ENCRYPTION_KEY);
+      const dbEncryptionKey = getEncryptionKeyFromHex(DB_ENCRYPTION_KEY);
       if (!signer) {
         throw new Error("Signer is not set");
       }

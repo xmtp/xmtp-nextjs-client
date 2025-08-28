@@ -619,23 +619,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/node-bindings@npm:1.2.0-dev.c24af30":
-  version: 1.2.0-dev.c24af30
-  resolution: "@xmtp/node-bindings@npm:1.2.0-dev.c24af30"
-  checksum: 10c0/0ca7dbe59694cf11e17cb30af0264bd341332338724faa112371265f8caf7fdb75661bc32ac1f5cb3aae2e504a8d5db15440a427c412a94331d317f7bc50c6a9
+"@xmtp/node-bindings@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@xmtp/node-bindings@npm:1.4.0"
+  checksum: 10c0/0db6a84d57fc83b8206f1dc24aee6234440673fe1095c8cf614ab341c10777b029b265066f3652e4938a17745121e986033748b5c87db694b96e478217d230b1
   languageName: node
   linkType: hard
 
-"@xmtp/node-sdk@npm:2.0.3":
-  version: 2.0.3
-  resolution: "@xmtp/node-sdk@npm:2.0.3"
+"@xmtp/node-sdk@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@xmtp/node-sdk@npm:4.1.0"
   dependencies:
     "@xmtp/content-type-group-updated": "npm:^2.0.2"
     "@xmtp/content-type-primitives": "npm:^2.0.2"
     "@xmtp/content-type-text": "npm:^2.0.2"
-    "@xmtp/node-bindings": "npm:1.2.0-dev.c24af30"
-    "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/e10724745d5417b29663766afa56c789e0be7ac229a7f7d071f486b380a884068633669c37fd05065d55c4ae8876b2a75b496c0a62ba0be8310657cb2592023f
+    "@xmtp/node-bindings": "npm:1.4.0"
+  checksum: 10c0/5fd54c85fafe057675a375151f8fda71b7bef7d3b894ea913b313def5410cb04aa64db12c9155a419882e9a29dd8d7d0b777a9f1b49062d7401b93444951927a
   languageName: node
   linkType: hard
 
@@ -2963,7 +2962,7 @@ __metadata:
     "@types/node": "npm:^20.14.2"
     "@types/react": "npm:^18.2.64"
     "@types/react-dom": "npm:^18.2.21"
-    "@xmtp/node-sdk": "npm:2.0.3"
+    "@xmtp/node-sdk": "npm:4.1.0"
     autoprefixer: "npm:^10.4.18"
     dotenv: "npm:^16.4.5"
     next: "npm:14.1.3"
